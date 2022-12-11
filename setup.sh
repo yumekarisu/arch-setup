@@ -54,7 +54,18 @@ essential="firefox \
 	   btop \
 	   neofetch \
 	   zsh \
-	   zsh-completions"
+	   zsh-completions \
+	   lxappearance"
+
+filemanager="thunar \
+	gvfs \
+	gvfs-mtp \
+	tumbler \
+	thunar-volman \
+	thunar-archive-plugin \
+	thunar-media-tags-plugin \
+	xarchiver \
+	ffmpegthumbnailer"
 
 winedeps="giflib \
 	lib32-giflib \
@@ -120,6 +131,11 @@ appsAUR="memento \
 	 prismlauncher-bin \
 	 python-ffmpeg-patched-git"
 
+git clone https://aur.archlinux.org/yay.git
+cd yay-bin
+makepkg -si
+cd
+rm -rf yay-bin
 sudo pacman -Syu $mesa $intelgpu $amdgpu $audio
-sudo pacman -S $sway $fonts $essential $winedeps
+sudo pacman -S $sway $fonts $essential $filemanager $winedeps
 yay -S $wmAUR $appsAUR
