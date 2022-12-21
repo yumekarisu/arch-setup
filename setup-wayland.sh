@@ -4,7 +4,7 @@
 
 ## graphics
 
-mesa=" mesa lib32-mesa"
+mesa="mesa lib32-mesa"
 
 intelgpu="vulkan-intel"
 
@@ -20,17 +20,18 @@ audio="pipewire wireplumber pipewire-alsa pipewire-pulse pipewire-jack \
 
 sway="sway \
       swaybg \
-      swaylock \
-      swayidle \
-      gammastep \
       waybar \
-      mako \
-      kanshi \
       network-manager-applet \
       pavucontrol \
       wlroots \
       xorg-xwayland \
-      brightnessctl"
+      brightnessctl \
+      foot \
+      libsixel \
+      dconf-editor \
+      grim \
+      wl-clipboard \
+      slurp"
 
 ## fonts
 
@@ -48,6 +49,8 @@ essential="firefox \
 	   gamemode \
 	   wine-staging \
 	   fcitx5 \
+	   fcitx5-gtk \
+	   fcitx5-qt \
 	   fcitx5-mozc \
 	   qbittorrent \
 	   mpv \
@@ -55,15 +58,13 @@ essential="firefox \
 	   neofetch \
 	   zsh \
 	   zsh-completions \
-	   lxappearance"
+	   cpupower"
 
-filemanager="thunar \
+filemanager="pcmanfm-qt \
+	lximage-qt \
 	gvfs \
 	gvfs-mtp \
 	tumbler \
-	thunar-volman \
-	thunar-archive-plugin \
-	thunar-media-tags-plugin \
 	xarchiver \
 	ffmpegthumbnailer"
 
@@ -116,26 +117,21 @@ winedeps="giflib \
 
 ## AUR
 wmAUR="tofi \
-       autotiling"
+       autotiling \
+       cliphist"
 
 appsAUR="memento \
 	 anki-official-binary-bundle \
-	 alacritty-sixel-git \
 	 webcord \
-	 mangohud-common \
-	 mangohud \
-	 lib32-mangohud \
-	 goverlay-bin \
-	 spotify-snapstore \
+	 spotify-edge \
 	 an-anime-game-launcher-gtk-bin \
-	 prismlauncher-bin \
-	 python-ffmpeg-patched-git"
+	 prismlauncher-bin"
 
-git clone https://aur.archlinux.org/yay.git
+git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
 cd
 rm -rf yay-bin
-sudo pacman -Syu $mesa $intelgpu $amdgpu $audio
-sudo pacman -S $sway $fonts $essential $filemanager $winedeps
-yay -S $wmAUR $appsAUR
+sudo pacman -Syu --needed $mesa $intelgpu $amdgpu $audio
+sudo pacman -S --needed $sway $fonts $essential $filemanager $winedeps
+yay -S $wmAUR $appsAUR --sudoloop
