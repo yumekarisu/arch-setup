@@ -21,14 +21,15 @@ audio="pipewire wireplumber pipewire-alsa pipewire-pulse pipewire-jack \
 sway="sway \
       swaybg \
       waybar \
-      network-manager-applet \
-      pavucontrol \
       wlroots \
-      xorg-xwayland \
+      xorg-xwayland"
+      
+wmUtils="network-manager-applet \
+      pavucontrol \
       brightnessctl \
-      foot \
       libsixel \
       dconf-editor \
+      gamescope \
       grim \
       wl-clipboard \
       slurp"
@@ -133,5 +134,5 @@ makepkg -si
 cd
 rm -rf yay-bin
 sudo pacman -Syu --needed $mesa $intelgpu $amdgpu $audio
-sudo pacman -S --needed $sway $fonts $essential $filemanager $winedeps
+sudo pacman -S --needed $sway $wmUtils $fonts $essential $filemanager $winedeps
 yay -S $wmAUR $appsAUR --sudoloop
