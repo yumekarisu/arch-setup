@@ -8,7 +8,8 @@ mesa="mesa lib32-mesa"
 
 intelgpu="vulkan-intel"
 
-amdgpu="xf86-video-amdgpu vulkan-radeon \
+amdgpu="xf86-video-amdgpu \
+	vulkan-radeon \
 	lib32-vulkan-radeon"
 
 ## audio
@@ -18,21 +19,13 @@ audio="pipewire wireplumber pipewire-alsa pipewire-pulse pipewire-jack \
 
 ## sway
 
-sway="sway \
-      swaybg \
-      waybar \
-      wlroots \
-      xorg-xwayland"
+x11="xorg-server \
+      xorg-xinit \
+      xorg-xsetroot \
+      xorg-xrdb"
       
-wmUtils="network-manager-applet \
-      pavucontrol \
-      brightnessctl \
-      libsixel \
-      dconf-editor \
-      gamescope \
-      grim \
-      wl-clipboard \
-      slurp"
+wmUtils="pavucontrol \
+      brightnessctl"
 
 ## fonts
 
@@ -59,10 +52,12 @@ essential="firefox \
 	   neofetch \
 	   zsh \
 	   zsh-completions \
-	   cpupower"
+	   cmus \
+	   cpupower \
+	   libpulse \
+           alsa-utils"
 
-filemanager="pcmanfm-qt \
-	lximage-qt \
+filemanager="pcmanfm-gtk3 \
 	gvfs \
 	gvfs-mtp \
 	tumbler \
@@ -117,22 +112,44 @@ winedeps="giflib \
 	lib32-vulkan-icd-loader"
 
 ## AUR
-wmAUR="tofi \
-       autotiling \
-       cliphist"
-
 appsAUR="memento \
+	 alacritty-sixel-git \
 	 anki-official-binary-bundle \
-	 webcord \
+	 discord_arch_electron \
 	 spotify-edge \
 	 an-anime-game-launcher-gtk-bin \
-	 prismlauncher-bin"
+	 prismlauncher-bin \
+	 protontricks \
+	 networkmanager-iwd"
 
+mkdir repo
+cd repo
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
-cd
+cd ..
 rm -rf yay-bin
+
+cd dwm
+make
+sudo make install
+make clean
+cd ..
+
+cd dmenu
+make
+sudo make install
+make clean
+cd ..
+
+cd dwmblocks-async
+make
+sudo make install
+make clean
+cd ..
+
+cd
+
 sudo pacman -Syu --needed $mesa $intelgpu $amdgpu $audio
-sudo pacman -S --needed $sway $wmUtils $fonts $essential $filemanager $winedeps
-yay -S $wmAUR $appsAUR --sudoloop
+sudo pacman -S --needed $x11 $wmUtils $fonts $essential $filemanager $winedeps
+yay -S $appsAUR --sudoloop
