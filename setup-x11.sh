@@ -27,6 +27,8 @@ xorg="xorg-server \
     xorg-xinit"
 
 plasma="plasma-desktop \
+	sddm \
+	sddm-kcm
 	plasma-pa \
 	konsole \
 	gwenview \
