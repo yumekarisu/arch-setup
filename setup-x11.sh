@@ -19,15 +19,16 @@ audio=" pipewire \
 	pipewire-audio \
 	wireplumber \
 	pipewire-pulse \
-    lib32-pipewire \
-    pipewire-jack \
-    lib32-pipewire-jack"
+   	lib32-pipewire \
+    	pipewire-jack \
+    	lib32-pipewire-jack"
 
 xorg="xorg-server \
     xorg-xinit"
 
 plasma="plasma-desktop \
 	plasma-pa \
+	konsole \
 	gwenview \
 	dolphin \
 	ark \
@@ -45,34 +46,27 @@ fonts="	noto-fonts \
 	ttf-dejavu"
 
 ## Apps
-essential="firefox \
-	   fcitx5 \
+essential="fcitx5 \
 	   fcitx5-gtk \
 	   fcitx5-qt \
 	   fcitx5-mozc \
 	   kcm-fcitx5 \
-	   qbittorrent \
-	   mpv \
 	   btop \
 	   neofetch \
 	   imagemagick \
 	   libsixel \
 	   zsh \
 	   zsh-completions \
-	   cmus \
 	   cpupower \
 	   github-cli \
-	   flatpak \
-       foot"
+	   flatpak"
 
-gaming=" steam \
-	 gamemode \
-     wine-staging"
+gaming="gamemode \
+     	wine-staging"
 
 ## AUR
-appsAUR="an-anime-game-launcher-bin \
-	 opentabletdriver"
 
-sudo pacman -Syu --needed $mesa $intelgpu $amdgpu $audio
-sudo pacman -S --needed $xorg $plasma $fonts $essential $gaming 
-yay -S $appsAUR --sudoloop
+sudo pacman -Syu --needed $mesa $intelgpu $amdgpu $audio $fonts
+sudo pacman -S --needed $xorg $plasma $essential $gaming
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --user firefox discord spotify qbittorrent memento
